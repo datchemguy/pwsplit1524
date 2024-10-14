@@ -40,6 +40,18 @@
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
       </HBox>
-      <ListView fx:id="expenses" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+      <GridPane VBox.vgrow="ALWAYS">
+         <columnConstraints>
+            <ColumnConstraints hgrow="ALWAYS" percentWidth="70.0" />
+            <ColumnConstraints hgrow="ALWAYS" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <ListView fx:id="expenses" />
+            <ListView fx:id="debts" GridPane.columnIndex="1" />
+         </children>
+      </GridPane>
    </children>
 </VBox>

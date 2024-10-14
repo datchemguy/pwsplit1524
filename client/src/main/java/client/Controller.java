@@ -19,6 +19,7 @@ public class Controller implements Initializable {
     @FXML private TextField cents;
     @FXML private TextField item;
     @FXML private ListView<Expense> expenses;
+    @FXML private ListView<Debt> debts;
     private ServerClient server;
 
     public void setServer(ServerClient server) {
@@ -35,7 +36,10 @@ public class Controller implements Initializable {
     public void refresh() {
         Expense[] exps = server.getAll();
         if(exps == null) error();
-        else expenses.getItems().setAll(exps);
+        else {
+            expenses.getItems().setAll(exps);
+            debts.getItems().setAll(Utils.calculateDebts(exps));
+        }
     }
 
     public void post() {
