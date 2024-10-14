@@ -79,10 +79,9 @@ public class Controller implements Initializable {
     }
 
     private void error() {
-        Alert err = new Alert(Alert.AlertType.ERROR);
+        Alert err = new Alert(Alert.AlertType.ERROR, "server down idk");
         err.setTitle("Error");
         err.setHeaderText("Network Error");
-        err.setContentText("server down idk");
         err.showAndWait();
     }
 }
