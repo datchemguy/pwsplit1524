@@ -4,11 +4,14 @@ import commons.Expense;
 import commons.Flatmate;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import org.springframework.web.client.ResourceAccessException;
 
+import java.net.ConnectException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -17,7 +20,7 @@ public class Controller implements Initializable {
     @FXML private TextField euros;
     @FXML private TextField cents;
     @FXML private TextField item;
-    @FXML private ListView<Expense> expensesView;
+    @FXML private ListView<Expense> expenses;
     private ServerClient server;
 
     public void setServer(ServerClient server) {
@@ -32,7 +35,11 @@ public class Controller implements Initializable {
     }
 
     public void refresh() {
-        expensesView.getItems().setAll(server.getAll());
+        try {
+            expenses.getItems().setAll(server.getAll());
+        } catch(ResourceAccessException _) {
+            error();
+        }
     }
 
     public void post() {
@@ -53,16 +60,24 @@ public class Controller implements Initializable {
         String what = item.getText();
         if(what.isBlank()) what = Utils.defaultItem();
         if(ok) {
-            server.post(new Expense(who, howMuch, what));
-            refresh();
+            try {
+                server.post(new Expense(who, howMuch, what));
+                refresh();
+            } catch(ResourceAccessException _) {
+                error();
+            }
         }
     }
 
     public void delete() {
-        expensesView.getSelectionModel()
-                .getSelectedItems()
-                .forEach(server::delete);
-        refresh();
+        try {
+            expenses.getSelectionModel()
+                    .getSelectedItems()
+                    .forEach(server::delete);
+            refresh();
+        } catch(ResourceAccessException _) {
+            error();
+        }
     }
 
     public void keyPress(KeyEvent e) {
@@ -71,5 +86,13 @@ public class Controller implements Initializable {
             case ENTER -> post();
             case DELETE -> delete();
         }
+    }
+
+    private void error() {
+        Alert err = new Alert(Alert.AlertType.ERROR);
+        err.setTitle("Error");
+        err.setHeaderText("Network Error");
+        err.setContentText("server down idk");
+        err.showAndWait();
     }
 }

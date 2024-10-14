@@ -1,6 +1,7 @@
 package client;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -24,11 +25,12 @@ public class MainApp extends Application {
         } catch(NumberFormatException _) {
             controller.setServer(new ServerClient(host));
         }
-        //controller.refresh();
 
         stage.setTitle("PWSplit");
         stage.setScene(scene);
         stage.show();
+
+        Platform.runLater(controller::refresh);
     }
 
     public static void main(String[] args) {
