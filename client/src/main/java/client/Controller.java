@@ -9,9 +9,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
-import org.springframework.web.client.ResourceAccessException;
 
-import java.net.ConnectException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -35,11 +33,9 @@ public class Controller implements Initializable {
     }
 
     public void refresh() {
-        try {
-            expenses.getItems().setAll(server.getAll());
-        } catch(ResourceAccessException _) {
-            error();
-        }
+        Expense[] exps = server.getAll();
+        if(exps == null) error();
+        else expenses.getItems().setAll(exps);
     }
 
     public void post() {
@@ -60,24 +56,18 @@ public class Controller implements Initializable {
         String what = item.getText();
         if(what.isBlank()) what = Utils.defaultItem();
         if(ok) {
-            try {
-                server.post(new Expense(who, howMuch, what));
-                refresh();
-            } catch(ResourceAccessException _) {
-                error();
-            }
+            server.post(new Expense(who, howMuch, what));
+            refresh();
         }
     }
 
     public void delete() {
-        try {
-            expenses.getSelectionModel()
-                    .getSelectedItems()
-                    .forEach(server::delete);
-            refresh();
-        } catch(ResourceAccessException _) {
-            error();
-        }
+        for(Expense e : expenses.getSelectionModel().getSelectedItems())
+            if(!server.delete(e)) {
+                error();
+                return;
+            }
+        refresh();
     }
 
     public void keyPress(KeyEvent e) {
