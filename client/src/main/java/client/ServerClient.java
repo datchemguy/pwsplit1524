@@ -17,7 +17,7 @@ public class ServerClient {
     }
 
     public ServerClient(String host) {
-        this(host, new RestTemplate(List.of(new MappingJackson2HttpMessageConverter())));
+        this(host, new RestTemplate());
     }
 
     public ServerClient(String host, int port) {
