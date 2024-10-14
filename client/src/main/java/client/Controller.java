@@ -2,8 +2,6 @@ package client;
 
 import commons.Expense;
 import commons.Flatmate;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
@@ -19,7 +17,6 @@ public class Controller implements Initializable {
     @FXML private TextField euros;
     @FXML private TextField cents;
     @FXML private TextField item;
-    private ObservableList<Expense> expenses;
     @FXML private ListView<Expense> expensesView;
     private ServerClient server;
 
@@ -32,12 +29,10 @@ public class Controller implements Initializable {
         payer.getItems().setAll(Flatmate.values());
         euros.textProperty().addListener(Utils.numConstraint(euros, 5));
         cents.textProperty().addListener(Utils.numConstraint(cents, 2));
-        expenses = FXCollections.observableArrayList();
-        expensesView.setItems(expenses);
     }
 
     public void refresh() {
-        expenses.setAll(server.getAll());
+        expensesView.getItems().setAll(server.getAll());
     }
 
     public void post() {
@@ -58,7 +53,7 @@ public class Controller implements Initializable {
         String what = item.getText();
         if(what.isBlank()) what = Utils.defaultItem();
         if(ok) {
-            server.post(new Expense(0, who, howMuch, what));
+            server.post(new Expense(who, howMuch, what));
             refresh();
         }
     }

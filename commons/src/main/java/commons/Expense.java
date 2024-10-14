@@ -8,11 +8,17 @@ import java.util.Objects;
 @Table(name = "expenses")
 public class Expense {
     @Id @GeneratedValue(strategy = GenerationType.SEQUENCE) private long id;
-    @Enumerated(EnumType.STRING) private Flatmate payer;
+    @Enumerated(EnumType.ORDINAL) private Flatmate payer;
     private int cost;
     private String item;
 
-    public Expense() {this(0L, null, 0, "");}
+    public Expense() {
+        this(0, null, 0, "");
+    }
+
+    public Expense(Flatmate payer, int cost, String item) {
+        this(0, payer, cost, item);
+    }
 
     public Expense(long id, Flatmate payer, int cost, String item) {
         this.id = id;
