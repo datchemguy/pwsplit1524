@@ -8,8 +8,8 @@ import javafx.scene.control.TextField;
 import java.util.Random;
 
 class Utils {
-    static String[] placeholders = {"something", "idk", "random shit", "why do you care"};
-    static Random rand = new Random();
+    static final String[] placeholders = {"something", "idk", "random shit", "why do you care"};
+    static final Random rand = new Random();
 
     static String defaultItem() {
         return defaultItem(rand);
@@ -30,7 +30,7 @@ class Utils {
         };
     }
 
-    static Debt[] calculateDebts(Expense[] expenses) {
+    static Debt[] calculateDebts(Expense... expenses) {
         Flatmate[] mates = Flatmate.values();
         int n = mates.length;
         int[] debts = new int[n];

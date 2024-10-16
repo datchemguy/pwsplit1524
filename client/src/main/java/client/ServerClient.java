@@ -21,9 +21,13 @@ public class ServerClient {
         this(host + ":" + port + "/");
     }
 
+    String getHost() {
+        return host;
+    }
+
     public Expense[] getAll() {
         try {
-            return template.getForEntity(host, Expense[].class).getBody();
+            return template.getForObject(host, Expense[].class);
         } catch(RestClientException _) {
             return null;
         }
