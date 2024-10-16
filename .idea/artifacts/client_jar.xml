@@ -1,0 +1,30 @@
+<component name="ArtifactManager">
+  <artifact name="client:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/client_jar</output-path>
+    <root id="root">
+      <element id="archive" name="client.jar">
+        <element id="module-output" name="client" />
+        <element id="module-output" name="commons" />
+      </element>
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-base:23" />
+      <element id="library" level="project" name="Maven: org.controlsfx:controlsfx:11.2.1" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-fxml:win:23" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-base:win:23" />
+      <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.18.0" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-controls:23" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-fxml:23" />
+      <element id="library" level="project" name="Maven: org.springframework:spring-jcl:6.1.13" />
+      <element id="library" level="project" name="Maven: jakarta.persistence:jakarta.persistence-api:3.1.0" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-graphics:23" />
+      <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.17.2" />
+      <element id="library" level="project" name="Maven: io.micrometer:micrometer-commons:1.12.10" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-graphics:win:23" />
+      <element id="library" level="project" name="Maven: io.micrometer:micrometer-observation:1.12.10" />
+      <element id="library" level="project" name="Maven: org.springframework:spring-beans:6.1.13" />
+      <element id="library" level="project" name="Maven: org.springframework:spring-web:6.1.13" />
+      <element id="library" level="project" name="Maven: org.springframework:spring-core:6.1.13" />
+      <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.17.2" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-controls:win:23" />
+    </root>
+  </artifact>
+</component>

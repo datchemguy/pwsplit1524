@@ -1,11 +1,8 @@
 package client;
 
 import commons.Expense;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.List;
 
 public class ServerClient {
     private final String host;
